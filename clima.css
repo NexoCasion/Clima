@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+body{ 
+    background: url('./Imagens/fundo\ 2.jpg');
+    background-repeat: no-repeat ;
+    background-size:cover;
+    color:white ;
+    overflow: hidden;
+    height: 100vh;
+}
+*{
+    box-sizing: border-box;
+    margin: 0px ;
+    padding: 10px ;
+    font-family: 'Raleway', sans-serif;
+ }
+ {
+.container
+ padding: 20px 70px;
+
+ }
+ .current-info
+ {
+    display: flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+ }
+ .date-container{
+    font-weight: 100;
+ }
+ .date-container .time{
+    font-size: 70px;
+ }
+ .date-container .#am-pm{
+    font-size: 30px;
+    margin-left: 20px;
+ }
+ .date-container .date{
+    font-size: 30px;
+ }
+ .place-container{
+    text-align: end;
+ }
+ .place-container .time-zone{
+font-size: 12px;
+font-weight: 100px;
+
+ }
+.place-container .country{
+    font-size: 12px;
+    font-weight: 700;
+}
+.current-info .others{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(92, 106, 3, 0.37)
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+    border: 1p solid #eee;
+}
+.current-info .others .weather-item{
+    display: flex;
+    justify-content: space-between;
+}
