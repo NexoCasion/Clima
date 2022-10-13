@@ -8,7 +8,7 @@ const currentTempEl = document.getElementById('current-temp');
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-const API_KEY = '906139ee63600f452eca1ffabe78e607';
+const API_KEY = '793d24430e973a2d4a9959ed1808807f';
 
 // datas e temporizador
 setInterval(() => {
@@ -38,11 +38,66 @@ function getweatherdata(){
         .then(res => res.json())
         .then(data =>{
             console.log(data);
+            showWeatherData(data);
         })
 
     })
 }
+function showWeatherData(data){
+    let {humidity, pressure, sunrise, sunset, wind_speed} = data.current;
+    timezone.innerHTML = data.timezone
+    countryEl.innerHTML = data.lat + 'N' + data.lon + "E"
 
+    currentWeatherItemsEl.innerHTML = `
+    <div class"weather-item">
+        <div> humidity</div>
+        <div> ${humidity}</div>
+    </div>
+    <div class"weather-item">
+        <div>Pressure</div>
+        <div> ${pressure}</div>
+    </div>
+    <div class"weather-item">
+        <div> Wind Speed</div>
+        <div> ${wind_speed}</div>
+    </div>
+    <div class"weather-item">
+        <div> Sunrise </div>
+        <div> ${window.moment(sunrise * 1000).format ('HH:mm a')}</div>
+    </div>
+    <div class"weather-item">
+         <div> Sunset </div>
+        <div> ${window.moment(sunset * 1000).format ('HH:mm a')}</div>
+    </div>
+
+    `;
+
+    let otherDayForecast = ''
+    data.daily.forEach((day, idx)=>{
+        if(idx == 0){
+            currentTempEl.innerHTML = `
+                <img  src="http://openweathermap.org/img/wn//${day.weather[0].icon}@4x.png"
+                    alt="weather icon"
+                    class="w-icon"
+                >
+                <div class="other">
+                <div class="day">${window.moment(day.dt*1000).format('dddd')}</div>
+                <div class="temp">Night - ${day.temp.night}&#176;C</div>
+                <div class="temp">day - ${day.temp.night}&#176;C</div>
+                </div>
+            `
+        }else{
+            otherDayForecast +=`
+            <div class="weather-forecast-item">
+                <div class="day">${window.moment(day.dt*1000).format('ddd')}</div> 
+                <img  src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" 
+                <div class="temp">Night - ${day.temp.night}&#176;C</div>
+                <div class="temp">day - ${day.temp.night}&#176;C</div> 
+            </div>        
+            `
+        }
+    })
+}
 
 
 // git commandos 
